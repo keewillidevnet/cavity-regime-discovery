@@ -118,10 +118,10 @@ AlphaCav is a **physics-native generative foundation model** trained to:
 
 This problem sits at the intersection of multi-physics simulation, AI-driven scientific discovery, ocean acoustics, and undersea systems engineering. No single organization owns all of that capability.
 
-### Navy/DoD Research Organizations
-- Office of Naval Research (Code 33 Ocean Acoustics)
-- NSWC Carderock (acoustic test facilities)
-- NUWC Newport (undersea systems)
+### Navy Research Organizations
+- Office of Naval Research
+- NSWC Carderock
+- NUWC Newport
 - Naval Research Laboratory
 
 ### University-Affiliated Research Centers (UARCs)
