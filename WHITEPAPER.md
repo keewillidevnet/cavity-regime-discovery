@@ -622,10 +622,10 @@ Trained model inference is lightweight, enabling rapid exploration of parameter 
 
 ## Contact
 
-*Author information to be added.*
+*Keenan Williams | telesis001@icloud.com*
 
 ---
 
 **Document Version:** 1.0  
-**Date:** December 2024  
+**Date:** December 2025  
 **Classification:** Unclassified / Public Release
