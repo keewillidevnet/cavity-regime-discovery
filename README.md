@@ -21,11 +21,6 @@ We have systematically avoided the regimes that "didn't survive" the selection f
 
 **AlphaCav corrects for this bias.** The model doesn't know what's "supposed" to work. It only knows what's physically consistent.
 
-![Survivorship Bias - WWII Aircraft Analysis](figures/survivorship.bias)
-
-*The red dots show bullet holes on planes that returned. Abraham Wald recognized the fatal flaw: armor the areas without holes, because planes hit there never made it back.*
-
-
 ## Repository Structure
 
 ```
