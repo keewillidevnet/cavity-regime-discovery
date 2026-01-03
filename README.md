@@ -84,17 +84,17 @@ AlphaCav is a **physics-native generative foundation model** trained to:
 │         Regime Discovery in Gas-Supported Supercavitation       │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
-│  ┌───────────┐ ┌───────────┐ ┌───────────┐ ┌───────────┐       │
-│  │  Cavity   │ │    Gas    │ │  Acoustic │ │ Downstream│       │
-│  │ Dynamics  │ │ Injection │ │   Source  │ │Disturbance│       │
-│  │  Encoder  │ │  Encoder  │ │  Encoder  │ │  Encoder  │       │
-│  └─────┬─────┘ └─────┬─────┘ └─────┬─────┘ └─────┬─────┘       │
+│  ┌───────────┐ ┌───────────┐ ┌───────────┐ ┌───────────┐        │
+│  │  Cavity   │ │    Gas    │ │  Acoustic │ │ Downstream│        │
+│  │ Dynamics  │ │ Injection │ │   Source  │ │Disturbance│        │
+│  │  Encoder  │ │  Encoder  │ │  Encoder  │ │  Encoder  │        │
+│  └─────┬─────┘ └─────┬─────┘ └─────┬─────┘ └─────┬─────┘        │
 │        │             │             │             │              │
 │        └─────────────┴──────┬──────┴─────────────┘              │
 │                             │                                   │
 │                      ┌──────▼──────┐                            │
-│                      │ Cross-Domain │                            │
-│                      │  Attention   │                            │
+│                      │ Cross-Domain│                            │
+│                      │  Attention  │                            │
 │                      └──────┬──────┘                            │
 │                             │                                   │
 │                      ┌──────▼──────┐                            │
@@ -105,11 +105,11 @@ AlphaCav is a **physics-native generative foundation model** trained to:
 │                             │                                   │
 │           ┌─────────────────┼─────────────────┐                 │
 │           │                 │                 │                 │
-│    ┌──────▼──────┐   ┌──────▼──────┐   ┌──────▼──────┐         │
-│    │   Regime    │   │  Mechanism  │   │  Hypothesis │         │
-│    │     Map     │   │ Identifier  │   │  Generator  │         │
-│    │  Generator  │   │             │   │             │         │
-│    └─────────────┘   └─────────────┘   └─────────────┘         │
+│    ┌──────▼──────┐   ┌──────▼──────┐   ┌──────▼──────┐          │
+│    │   Regime    │   │  Mechanism  │   │  Hypothesis │          │
+│    │     Map     │   │ Identifier  │   │  Generator  │          │
+│    │  Generator  │   │             │   │             │          │
+│    └─────────────┘   └─────────────┘   └─────────────┘          │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -202,5 +202,3 @@ This proposal and associated documentation are provided under the [BSD 3-Clause 
 **Email:** telesis001@icloud.com
 
 ---
-
-**Star this repo if you find it valuable!**
