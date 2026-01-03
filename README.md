@@ -84,17 +84,17 @@ AlphaCav is a **physics-native generative foundation model** trained to:
 │         Regime Discovery in Gas-Supported Supercavitation       │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
-│  ┌───────────┐ ┌───────────┐ ┌───────────┐ ┌───────────┐        │
-│  │  Cavity   │ │    Gas    │ │  Acoustic │ │ Downstream│        │
-│  │ Dynamics  │ │ Injection │ │   Source  │ │Disturbance│        │
-│  │  Encoder  │ │  Encoder  │ │  Encoder  │ │  Encoder  │        │
-│  └─────┬─────┘ └─────┬─────┘ └─────┬─────┘ └─────┬─────┘        │
+│  ┌───────────┐ ┌───────────┐ ┌───────────┐ ┌───────────┐       │
+│  │  Cavity   │ │    Gas    │ │  Acoustic │ │ Downstream│       │
+│  │ Dynamics  │ │ Injection │ │   Source  │ │Disturbance│       │
+│  │  Encoder  │ │  Encoder  │ │  Encoder  │ │  Encoder  │       │
+│  └─────┬─────┘ └─────┬─────┘ └─────┬─────┘ └─────┬─────┘       │
 │        │             │             │             │              │
 │        └─────────────┴──────┬──────┴─────────────┘              │
 │                             │                                   │
 │                      ┌──────▼──────┐                            │
-│                      │ Cross-Domain│                            │
-│                      │  Attention  │                            │
+│                      │ Cross-Domain │                            │
+│                      │  Attention   │                            │
 │                      └──────┬──────┘                            │
 │                             │                                   │
 │                      ┌──────▼──────┐                            │
@@ -105,11 +105,11 @@ AlphaCav is a **physics-native generative foundation model** trained to:
 │                             │                                   │
 │           ┌─────────────────┼─────────────────┐                 │
 │           │                 │                 │                 │
-│    ┌──────▼──────┐   ┌──────▼──────┐   ┌──────▼──────┐          │
-│    │   Regime    │   │  Mechanism  │   │  Hypothesis │          │
-│    │     Map     │   │ Identifier  │   │  Generator  │          │
-│    │  Generator  │   │             │   │             │          │
-│    └─────────────┘   └─────────────┘   └─────────────┘          │
+│    ┌──────▼──────┐   ┌──────▼──────┐   ┌──────▼──────┐         │
+│    │   Regime    │   │  Mechanism  │   │  Hypothesis │         │
+│    │     Map     │   │ Identifier  │   │  Generator  │         │
+│    │  Generator  │   │             │   │             │         │
+│    └─────────────┘   └─────────────┘   └─────────────┘         │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -118,10 +118,10 @@ AlphaCav is a **physics-native generative foundation model** trained to:
 
 This problem sits at the intersection of multi-physics simulation, AI-driven scientific discovery, ocean acoustics, and undersea systems engineering. No single organization owns all of that capability.
 
-### Navy Research Organizations
-- Office of Naval Research
-- NSWC Carderock
-- NUWC Newport
+### Navy/DoD Research Organizations
+- Office of Naval Research (Code 33 Ocean Acoustics)
+- NSWC Carderock (acoustic test facilities)
+- NUWC Newport (undersea systems)
 - Naval Research Laboratory
 
 ### University-Affiliated Research Centers (UARCs)
@@ -169,14 +169,16 @@ This problem sits at the intersection of multi-physics simulation, AI-driven sci
 
 ## Related Work
 
+### Self-Supervised Foundation Models
+- [DINOv3: Self-supervised learning for vision at unprecedented scale (Meta AI 2025)](https://ai.meta.com/blog/dinov3-self-supervised-vision-model/) - Demonstrates that self-supervised foundation models can learn powerful representations without labels, enabling applications where annotation is scarce or impossible. DINOv3's frozen backbone + lightweight adapter paradigm directly informs AlphaCav's architecture.
+
 ### Physics-Informed Machine Learning
 - [Machine Learning in Acoustics (npj Acoustics 2025)](https://www.nature.com/articles/s44384-025-00021-w)
 - [GenCFD: Generative AI for Fluids (2024)](https://arxiv.org/abs/2409.18359)
 - [Physics-Informed Neural Networks Review](https://www.nature.com/articles/s42254-021-00314-5)
 
-### NVIDIA Physics AI
-- [PhysicsNeMo](https://developer.nvidia.com/physicsnemo) - Framework for physics AI models
-- [Cosmos](https://www.nvidia.com/en-us/ai/cosmos/) - World foundation models for physical AI
+### Compute Infrastructure
+All model training and inference executed on Navy DSRC systems (Nautilus/Narwhal) via DoD HPCMP, ensuring compliance with domestic compute requirements and data handling restrictions.
 
 ### ONR Programs
 - [Ocean Acoustics Program](https://www.onr.navy.mil/organization/departments/code-32/division-322/ocean-acoustics)

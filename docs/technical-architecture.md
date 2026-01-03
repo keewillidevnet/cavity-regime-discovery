@@ -16,17 +16,17 @@ This approach corrects for the survivorship bias inherent in traditional researc
 │         Regime Discovery in Gas-Supported Supercavitation       │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
-│  ┌───────────┐ ┌───────────┐ ┌───────────┐ ┌───────────┐        │
-│  │  Cavity   │ │    Gas    │ │  Acoustic │ │ Downstream│        │
-│  │ Dynamics  │ │ Injection │ │   Source  │ │Disturbance│        │
-│  │  Encoder  │ │  Encoder  │ │  Encoder  │ │  Encoder  │        │
-│  └─────┬─────┘ └─────┬─────┘ └─────┬─────┘ └─────┬─────┘        │
+│  ┌───────────┐ ┌───────────┐ ┌───────────┐ ┌───────────┐       │
+│  │  Cavity   │ │    Gas    │ │  Acoustic │ │ Downstream│       │
+│  │ Dynamics  │ │ Injection │ │   Source  │ │Disturbance│       │
+│  │  Encoder  │ │  Encoder  │ │  Encoder  │ │  Encoder  │       │
+│  └─────┬─────┘ └─────┬─────┘ └─────┬─────┘ └─────┬─────┘       │
 │        │             │             │             │              │
 │        └─────────────┴──────┬──────┴─────────────┘              │
 │                             │                                   │
 │                      ┌──────▼──────┐                            │
-│                      │ Cross-Domain│                            │
-│                      │  Attention  │                            │
+│                      │ Cross-Domain │                            │
+│                      │  Attention   │                            │
 │                      └──────┬──────┘                            │
 │                             │                                   │
 │                      ┌──────▼──────┐                            │
@@ -37,11 +37,11 @@ This approach corrects for the survivorship bias inherent in traditional researc
 │                             │                                   │
 │           ┌─────────────────┼─────────────────┐                 │
 │           │                 │                 │                 │
-│    ┌──────▼──────┐   ┌──────▼──────┐   ┌──────▼──────┐          │
-│    │   Regime    │   │  Mechanism  │   │  Hypothesis │          │
-│    │     Map     │   │ Identifier  │   │  Generator  │          │
-│    │  Generator  │   │             │   │             │          │
-│    └─────────────┘   └─────────────┘   └─────────────┘          │
+│    ┌──────▼──────┐   ┌──────▼──────┐   ┌──────▼──────┐         │
+│    │   Regime    │   │  Mechanism  │   │  Hypothesis │         │
+│    │     Map     │   │ Identifier  │   │  Generator  │         │
+│    │  Generator  │   │             │   │             │         │
+│    └─────────────┘   └─────────────┘   └─────────────┘         │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -56,6 +56,21 @@ The architecture separates physics encoding from cross-domain reasoning:
 - **Task-specific heads** generate outputs tailored to discovery objectives
 
 This separation allows the model to leverage domain-specific simulation data while learning emergent behaviors that arise from physics coupling.
+
+### Foundation Model Precedent: DINOv3
+
+The AlphaCav architecture draws inspiration from Meta's DINOv3 (2025), which demonstrates that self-supervised foundation models can achieve state-of-the-art performance without labeled training data.
+
+**Key DINOv3 principles adopted:**
+
+| DINOv3 Principle | AlphaCav Implementation |
+|------------------|------------------------|
+| Frozen backbone + lightweight adapters | Physics encoders serve multiple tasks without retraining |
+| Self-supervised learning without labels | Learn from CFD data without regime annotations |
+| Dense feature extraction | Dense field representations capture physics structure |
+| Single forward pass serves multiple tasks | Regime mapping, mechanism ID, hypothesis generation share backbone |
+
+DINOv3's success in satellite imagery, where manual annotation is impractical at scale, validates the approach for cavitation physics, where experimental regime labels are equally scarce. The model learns structure from data, not from human-provided labels.
 
 ---
 
@@ -192,7 +207,8 @@ These constraints ensure the model cannot generate physically impossible regimes
 
 | Component | Requirement |
 |-----------|-------------|
-| GPU resources | 8-32 A100 or equivalent |
+| Platform | Navy DSRC Nautilus (DoD HPCMP) |
+| GPU resources | 8-32 A100 GPUs (Nautilus AI/ML nodes) |
 | Training duration | 1-4 weeks |
 | Storage | 10-50 TB for training data |
 

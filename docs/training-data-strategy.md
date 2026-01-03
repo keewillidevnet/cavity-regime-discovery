@@ -6,6 +6,16 @@ AlphaCav requires training data that spans the physics of cavity dynamics, gas i
 
 The strategy explicitly addresses **survivorship bias** by ensuring training data covers parameter space systematically rather than following historical research priorities.
 
+### Self-Supervised Learning Paradigm
+
+Following the DINOv3 approach, AlphaCav employs self-supervised learning that does not require labeled regime classifications. The model learns rich representations from unlabeled CFD data by:
+
+1. **Contrastive learning** across simulation snapshots to identify physically meaningful structure
+2. **Physics-constrained reconstruction** that forces encoders to capture governing dynamics
+3. **Multi-fidelity consistency** that aligns representations across simulation fidelity levels
+
+This eliminates the annotation bottleneck. Regime labels are expensive (requiring expert analysis of each simulation) and potentially biased (reflecting historical assumptions about what constitutes distinct regimes). Self-supervised learning discovers structure from the data itself.
+
 ---
 
 ## Data Sources
@@ -175,6 +185,5 @@ The goal is to ensure the model sees parameter combinations that researchers nev
 
 ### Platform Options
 
-- DOE National Laboratory allocations (NERSC, OLCF)
-- DoD HPC Modernization Program
-- Commercial cloud (AWS, GCP) for burst capacity
+- DoD HPCMP allocation (Navy DSRC: Nautilus, Narwhal)
+- Additional DSRC resources as needed (AFRL, ARL, ERDC)

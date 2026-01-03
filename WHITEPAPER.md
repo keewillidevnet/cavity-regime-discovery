@@ -85,6 +85,19 @@ Foundation models trained on diverse simulation data can:
 
 The key insight is that a model trained on sufficient simulation diversity can internalize physical constraints and extrapolate to unexplored regions of parameter space in ways that purely data-driven surrogate models cannot.
 
+### 2.3 Architectural Precedent: Self-Supervised Vision Foundation Models
+
+Meta's DINOv3 (2025) demonstrates that self-supervised foundation models can achieve state-of-the-art performance across diverse tasks without labeled training data. Key findings relevant to AlphaCav:
+
+| DINOv3 Finding | AlphaCav Implication |
+|----------------|---------------------|
+| Frozen backbone + lightweight adapters outperform fine-tuned specialists | Physics encoders can serve multiple downstream tasks (regime mapping, mechanism ID, hypothesis generation) |
+| Self-supervised learning scales to 1.7B images without labels | Scales to massive synthetic CFD datasets where regime labels don't exist |
+| Dense pixel-level features capture scene structure | Dense field-level features can capture flow physics structure |
+| Satellite imagery backbone enables applications where annotation is impractical | Cavitation physics backbone enables discovery where experimental data is sparse |
+
+DINOv3's success in domains where labeling is prohibitively expensive (satellite imagery, medical imaging) validates the core AlphaCav premise: foundation models can learn powerful representations from unlabeled physics data, enabling discovery in parameter spaces that human intuition never explored.
+
 ---
 
 ## 3. Technical Approach
@@ -115,17 +128,17 @@ Each mechanism maps to specific encoder modules within the model architecture.
 │         Regime Discovery in Gas-Supported Supercavitation       │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
-│  ┌───────────┐ ┌───────────┐ ┌───────────┐ ┌───────────┐        │
-│  │  Cavity   │ │    Gas    │ │  Acoustic │ │ Downstream│        │
-│  │ Dynamics  │ │ Injection │ │   Source  │ │Disturbance│        │
-│  │  Encoder  │ │  Encoder  │ │  Encoder  │ │  Encoder  │        │
-│  └─────┬─────┘ └─────┬─────┘ └─────┬─────┘ └─────┬─────┘        │
+│  ┌───────────┐ ┌───────────┐ ┌───────────┐ ┌───────────┐       │
+│  │  Cavity   │ │    Gas    │ │  Acoustic │ │ Downstream│       │
+│  │ Dynamics  │ │ Injection │ │   Source  │ │Disturbance│       │
+│  │  Encoder  │ │  Encoder  │ │  Encoder  │ │  Encoder  │       │
+│  └─────┬─────┘ └─────┬─────┘ └─────┬─────┘ └─────┬─────┘       │
 │        │             │             │             │              │
 │        └─────────────┴──────┬──────┴─────────────┘              │
 │                             │                                   │
 │                      ┌──────▼──────┐                            │
-│                      │ Cross-Domain │                           │
-│                      │  Attention   │                           │
+│                      │ Cross-Domain │                            │
+│                      │  Attention   │                            │
 │                      └──────┬──────┘                            │
 │                             │                                   │
 │                      ┌──────▼──────┐                            │
@@ -136,11 +149,11 @@ Each mechanism maps to specific encoder modules within the model architecture.
 │                             │                                   │
 │           ┌─────────────────┼─────────────────┐                 │
 │           │                 │                 │                 │
-│    ┌──────▼──────┐   ┌──────▼──────┐   ┌──────▼──────┐          │
-│    │   Regime    │   │  Mechanism  │   │  Hypothesis │          │
-│    │     Map     │   │ Identifier  │   │  Generator  │          │
-│    │  Generator  │   │             │   │             │          │
-│    └─────────────┘   └─────────────┘   └─────────────┘          │
+│    ┌──────▼──────┐   ┌──────▼──────┐   ┌──────▼──────┐         │
+│    │   Regime    │   │  Mechanism  │   │  Hypothesis │         │
+│    │     Map     │   │ Identifier  │   │  Generator  │         │
+│    │  Generator  │   │             │   │             │         │
+│    └─────────────┘   └─────────────┘   └─────────────┘         │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -155,6 +168,8 @@ The architecture separates physics encoding from cross-domain reasoning:
 - **Task-specific heads** generate outputs tailored to discovery objectives
 
 This separation allows the model to leverage domain-specific simulation data while learning emergent behaviors that arise from physics coupling.
+
+Following the DINOv3 paradigm, the physics encoders are designed to produce rich, dense representations that can serve multiple downstream tasks through lightweight adapters. This enables a single forward pass through the backbone to support regime mapping, mechanism identification, and hypothesis generation simultaneously, reducing inference cost for deployment scenarios requiring multiple predictions.
 
 ---
 
@@ -409,6 +424,8 @@ This section addresses foreseeable methodological critiques and articulates the 
 
 **Response:** The proposed approach trains on physics, not data alone. Physics-informed neural network architectures constrain the learned representations to satisfy governing equations. Synthetic training data generated from high-fidelity CFD provides coverage across parameter space. The model learns physical relationships, not input-output mappings, enabling generalization from limited empirical data.
 
+Meta's DINOv3 (2025) provides direct precedent: self-supervised foundation models achieve state-of-the-art performance in domains where labeled data is scarce or nonexistent. DINOv3's satellite imagery backbone, trained without manual annotations, achieves exceptional performance on downstream tasks like canopy height estimation. AlphaCav applies the same paradigm to physics data, where regime labels are equally unavailable but physical constraints provide analogous structure for self-supervised learning.
+
 ### 11.2 Extrapolation Beyond Training Distribution
 
 **Critique:** Neural networks fail when extrapolating outside their training distribution. Novel regimes are, by definition, outside the distribution of known configurations.
@@ -622,10 +639,10 @@ Trained model inference is lightweight, enabling rapid exploration of parameter 
 
 ## Contact
 
-*Keenan Williams | telesis001@icloud.com*
+*Author information to be added.*
 
 ---
 
 **Document Version:** 1.0  
-**Date:** December 2025  
+**Date:** December 2024  
 **Classification:** Unclassified / Public Release

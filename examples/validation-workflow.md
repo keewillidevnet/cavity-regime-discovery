@@ -222,3 +222,51 @@ For public release (with appropriate review):
 2. Test additional geometries to assess transferability
 3. Investigate off-design performance
 4. Update training data with new measurements
+
+---
+
+## Appendix: DINOv3 for Automated Image Analysis
+
+### Leveraging Vision Foundation Models
+
+High-speed cavity imaging generates thousands of frames per test run. Manual analysis is impractical. Meta's DINOv3 provides a path to automated feature extraction without labeled training data.
+
+### Application to Water Tunnel Footage
+
+```python
+from dinov3 import DINOv3Backbone
+import torch
+
+# Load pre-trained DINOv3 backbone (frozen)
+backbone = DINOv3Backbone.load("dinov3-vit-l")
+
+# Process high-speed cavity images
+for frame in tunnel_footage:
+    # Extract dense features without labels
+    features = backbone.extract_features(frame)
+    
+    # Features capture:
+    # - Cavity boundary location
+    # - Re-entrant jet structure
+    # - Closure mode characteristics
+    # - Bubble cloud density
+```
+
+### Capabilities
+
+| Task | Traditional Approach | DINOv3 Approach |
+|------|---------------------|-----------------|
+| Cavity segmentation | Manual annotation or threshold-based | Zero-shot from dense features |
+| Closure mode classification | Expert labeling required | Cluster in feature space |
+| Re-entrant jet tracking | Frame-by-frame manual tracking | Temporal feature consistency |
+| Anomaly detection | Visual inspection | Distance in feature space |
+
+### Integration with AlphaCav
+
+DINOv3-extracted features from experimental imagery can be fused with AlphaCav physics predictions:
+
+1. **Sim-to-real validation**: Compare feature distributions between CFD visualizations and tunnel footage
+2. **Regime confirmation**: Cluster experimental frames in feature space to confirm predicted regime boundaries
+3. **Failure mode detection**: Identify when experimental conditions diverge from predicted regimes
+
+This creates a bridge between physics-native AI (AlphaCav) and vision foundation models (DINOv3) for comprehensive experimental validation.
