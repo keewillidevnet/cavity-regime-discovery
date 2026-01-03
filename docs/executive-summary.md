@@ -60,4 +60,7 @@ This work treats acoustic regime discovery as a physics problem. The approach is
 
 ---
 
-**Contact:** Keenan Williams (telesis001@icloud.com)
+### Contact
+
+**Author:** Keenan Williams  
+**Email:** telesis001@icloud.com
