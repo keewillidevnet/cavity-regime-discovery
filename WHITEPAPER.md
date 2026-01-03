@@ -128,17 +128,17 @@ Each mechanism maps to specific encoder modules within the model architecture.
 │         Regime Discovery in Gas-Supported Supercavitation       │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
-│  ┌───────────┐ ┌───────────┐ ┌───────────┐ ┌───────────┐       │
-│  │  Cavity   │ │    Gas    │ │  Acoustic │ │ Downstream│       │
-│  │ Dynamics  │ │ Injection │ │   Source  │ │Disturbance│       │
-│  │  Encoder  │ │  Encoder  │ │  Encoder  │ │  Encoder  │       │
-│  └─────┬─────┘ └─────┬─────┘ └─────┬─────┘ └─────┬─────┘       │
+│  ┌───────────┐ ┌───────────┐ ┌───────────┐ ┌───────────┐        │
+│  │  Cavity   │ │    Gas    │ │  Acoustic │ │ Downstream│        │
+│  │ Dynamics  │ │ Injection │ │   Source  │ │Disturbance│        │
+│  │  Encoder  │ │  Encoder  │ │  Encoder  │ │  Encoder  │        │
+│  └─────┬─────┘ └─────┬─────┘ └─────┬─────┘ └─────┬─────┘        │
 │        │             │             │             │              │
 │        └─────────────┴──────┬──────┴─────────────┘              │
 │                             │                                   │
 │                      ┌──────▼──────┐                            │
-│                      │ Cross-Domain │                            │
-│                      │  Attention   │                            │
+│                      │ Cross-Domain│                            │
+│                      │  Attention  │                            │
 │                      └──────┬──────┘                            │
 │                             │                                   │
 │                      ┌──────▼──────┐                            │
@@ -149,11 +149,11 @@ Each mechanism maps to specific encoder modules within the model architecture.
 │                             │                                   │
 │           ┌─────────────────┼─────────────────┐                 │
 │           │                 │                 │                 │
-│    ┌──────▼──────┐   ┌──────▼──────┐   ┌──────▼──────┐         │
-│    │   Regime    │   │  Mechanism  │   │  Hypothesis │         │
-│    │     Map     │   │ Identifier  │   │  Generator  │         │
-│    │  Generator  │   │             │   │             │         │
-│    └─────────────┘   └─────────────┘   └─────────────┘         │
+│    ┌──────▼──────┐   ┌──────▼──────┐   ┌──────▼──────┐          │
+│    │   Regime    │   │  Mechanism  │   │  Hypothesis │          │
+│    │     Map     │   │ Identifier  │   │  Generator  │          │
+│    │  Generator  │   │             │   │             │          │
+│    └─────────────┘   └─────────────┘   └─────────────┘          │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -633,16 +633,36 @@ Trained model inference is lightweight, enabling rapid exploration of parameter 
 
 ## References
 
-*To be populated with relevant citations from cavitation acoustics, foundation model, and physical AI literature.*
+### Self-Supervised Foundation Models
+1. Meta AI. "DINOv3: Self-supervised learning for vision at unprecedented scale." August 2025. https://ai.meta.com/blog/dinov3-self-supervised-vision-model/
 
+### Physics-Informed Machine Learning
+2. Bianco, M.J., et al. "Machine learning in acoustics: a review." npj Acoustics (2025). https://www.nature.com/articles/s44384-025-00021-w
+
+3. Karniadakis, G.E., et al. "Physics-informed machine learning." Nature Reviews Physics 3, 422–440 (2021). https://www.nature.com/articles/s42254-021-00314-5
+
+4. Lienen, M., et al. "GenCFD: High-resolution surrogate modeling for general-purpose CFD simulations." arXiv:2409.18359 (2024). https://arxiv.org/abs/2409.18359
+
+### Protein Structure Prediction (Conceptual Precedent)
+5. Jumper, J., et al. "Highly accurate protein structure prediction with AlphaFold." Nature 596, 583–589 (2021). https://doi.org/10.1038/s41586-021-03819-2
+
+### Cavitation and Supercavitation
+6. Franc, J.P. and Michel, J.M. "Fundamentals of Cavitation." Springer (2004).
+
+7. Savchenko, Y.N. "Supercavitation: Problems and Perspectives." CAV2001, Fourth International Symposium on Cavitation (2001).
+
+### ONR Program Documentation
+8. Office of Naval Research. "Ocean Acoustics Program." https://www.onr.navy.mil/organization/departments/code-32/division-322/ocean-acoustics
+
+9. Office of Naval Research. "Ship Signatures Program." https://www.onr.navy.mil/organization/departments/code-33/division-331/ship-signatures
 ---
 
 ## Contact
 
-*Author information to be added.*
+**Keenan Williams | telesis001@icloud.com**
 
 ---
 
-**Document Version:** 1.0  
-**Date:** December 2024  
+**Document Version:** 2.0  
+**Date:** January 2025  
 **Classification:** Unclassified / Public Release
