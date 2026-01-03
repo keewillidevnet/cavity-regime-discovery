@@ -66,6 +66,40 @@ The result is a fragmented understanding of acoustic regime boundaries and the p
 | Optimization within known design space | Discovery of unknown regimes |
 | Inherits 50 years of selection bias | Corrects for survivorship bias |
 
+## Prior Work and Novel Contribution
+
+### What Exists
+
+Machine learning has been applied to cavitation and underwater acoustics:
+
+- **Cavitation intensity recognition**: CNNs classify known intensity levels in pumps and valves
+- **Regime classification**: Physics-informed networks distinguish stable vs. transient cavitation
+- **Propeller noise synthesis**: GANs generate realistic cavitation signatures
+- **Machine condition monitoring**: Self-supervised anomaly detection (DCASE challenges)
+
+These approaches classify within predefined categories and require labeled data.
+
+### What Does Not Exist
+
+- **Foundation model architecture** for physical acoustics (frozen encoders + adapters)
+- **Self-supervised pre-training** on multi-physics CFD data
+- **Regime discovery** as an objective (vs. classification of known states)
+- **Multi-physics integration** of cavity dynamics, gas injection, and acoustics
+
+### Novel Contribution
+
+AlphaCav is the **first physics-native foundation model for acoustic regime discovery in fluid dynamics**.
+
+| Contribution | Distinction |
+|--------------|-------------|
+| Foundation model architecture | Generalizable backbone, not task-specific classifier |
+| Self-supervised on CFD | No regime labels required |
+| Discovery objective | Finds unknown regimes, not classifies known ones |
+| Multi-physics encoders | Jointly models cavity, gas, acoustic, and disturbance physics |
+| Physics-constrained latent space | Cannot generate physically inconsistent states |
+
+This combination enables systematic exploration of parameter space that human intuition never visited.
+
 ## Proposed Solution
 
 AlphaCav is a **physics-native generative foundation model** trained to:
@@ -84,17 +118,17 @@ AlphaCav is a **physics-native generative foundation model** trained to:
 │         Regime Discovery in Gas-Supported Supercavitation       │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
-│  ┌───────────┐ ┌───────────┐ ┌───────────┐ ┌───────────┐        │
-│  │  Cavity   │ │    Gas    │ │  Acoustic │ │ Downstream│        │
-│  │ Dynamics  │ │ Injection │ │   Source  │ │Disturbance│        │
-│  │  Encoder  │ │  Encoder  │ │  Encoder  │ │  Encoder  │        │
-│  └─────┬─────┘ └─────┬─────┘ └─────┬─────┘ └─────┬─────┘        │
+│  ┌───────────┐ ┌───────────┐ ┌───────────┐ ┌───────────┐       │
+│  │  Cavity   │ │    Gas    │ │  Acoustic │ │ Downstream│       │
+│  │ Dynamics  │ │ Injection │ │   Source  │ │Disturbance│       │
+│  │  Encoder  │ │  Encoder  │ │  Encoder  │ │  Encoder  │       │
+│  └─────┬─────┘ └─────┬─────┘ └─────┬─────┘ └─────┬─────┘       │
 │        │             │             │             │              │
 │        └─────────────┴──────┬──────┴─────────────┘              │
 │                             │                                   │
 │                      ┌──────▼──────┐                            │
-│                      │ Cross-Domain│                            │
-│                      │  Attention  │                            │
+│                      │ Cross-Domain │                            │
+│                      │  Attention   │                            │
 │                      └──────┬──────┘                            │
 │                             │                                   │
 │                      ┌──────▼──────┐                            │
@@ -105,11 +139,11 @@ AlphaCav is a **physics-native generative foundation model** trained to:
 │                             │                                   │
 │           ┌─────────────────┼─────────────────┐                 │
 │           │                 │                 │                 │
-│    ┌──────▼──────┐   ┌──────▼──────┐   ┌──────▼──────┐          │
-│    │   Regime    │   │  Mechanism  │   │  Hypothesis │          │
-│    │     Map     │   │ Identifier  │   │  Generator  │          │
-│    │  Generator  │   │             │   │             │          │
-│    └─────────────┘   └─────────────┘   └─────────────┘          │
+│    ┌──────▼──────┐   ┌──────▼──────┐   ┌──────▼──────┐         │
+│    │   Regime    │   │  Mechanism  │   │  Hypothesis │         │
+│    │     Map     │   │ Identifier  │   │  Generator  │         │
+│    │  Generator  │   │             │   │             │         │
+│    └─────────────┘   └─────────────┘   └─────────────┘         │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -202,3 +236,5 @@ This proposal and associated documentation are provided under the [BSD 3-Clause 
 **Email:** telesis001@icloud.com
 
 ---
+
+**Star this repo if you find it valuable!**

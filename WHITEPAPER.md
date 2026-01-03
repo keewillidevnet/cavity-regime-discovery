@@ -98,6 +98,45 @@ Meta's DINOv3 (2025) demonstrates that self-supervised foundation models can ach
 
 DINOv3's success in domains where labeling is prohibitively expensive (satellite imagery, medical imaging) validates the core AlphaCav premise: foundation models can learn powerful representations from unlabeled physics data, enabling discovery in parameter spaces that human intuition never explored.
 
+### 2.4 Prior Work and Novel Contribution
+
+#### What Exists
+
+Machine learning has been applied to cavitation and underwater acoustics in several contexts:
+
+| Domain | Existing Approaches | Objective |
+|--------|---------------------|-----------|
+| Cavitation intensity recognition | CNNs, autoencoders, hierarchical networks | Classify known intensity levels in pumps, valves, turbines |
+| Cavitation regime classification | Physics-informed neural networks | Binary classification (stable vs. transient) |
+| Propeller cavitation noise | Generative adversarial networks | Synthesize realistic acoustic signatures |
+| Underwater target recognition | CNNs, RNNs, autoencoders | Classify ships and marine sources |
+| Machine condition monitoring | Self-supervised anomaly detection (DCASE) | Detect deviations from normal operation |
+
+These approaches have demonstrated value for their respective tasks. However, they share common limitations: they classify within predefined categories, require labeled training data, and operate on single-physics representations.
+
+#### What Does Not Exist
+
+No prior work has addressed:
+
+1. **Foundation model architecture for physical acoustics**: Existing models are task-specific classifiers, not generalizable backbones with frozen encoders and lightweight adapters for multiple downstream tasks
+2. **Self-supervised pre-training on multi-physics CFD data**: Current approaches rely on labeled experimental data or single-physics simulations
+3. **Regime discovery as an objective**: All existing work classifies known categories; none explores parameter space to identify previously unknown acoustic regimes
+4. **Multi-physics integration**: No model jointly encodes cavity dynamics, gas injection physics, and acoustic emission within a unified architecture
+
+#### Novel Contribution
+
+AlphaCav represents the **first physics-native foundation model for acoustic regime discovery in fluid dynamics**. The novelty arises from the combination of:
+
+| Contribution | Distinction from Prior Work |
+|--------------|----------------------------|
+| Foundation model architecture | Frozen physics encoders + task-specific adapters, not single-purpose classifiers |
+| Self-supervised learning on CFD | Learns from unlabeled simulation data; no regime annotations required |
+| Discovery objective | Explores unknown parameter space to find regimes human intuition never visited |
+| Multi-physics integration | Jointly encodes cavity dynamics, gas injection, acoustic sources, and downstream disturbances |
+| Physics-constrained latent space | Representations satisfy governing equations; cannot generate physically inconsistent states |
+
+This combination enables a fundamentally different capability: systematic exploration of acoustic regime boundaries across high-dimensional parameter spaces, correcting for 50 years of survivorship bias in supercavitation research.
+
 ---
 
 ## 3. Technical Approach
@@ -128,17 +167,17 @@ Each mechanism maps to specific encoder modules within the model architecture.
 │         Regime Discovery in Gas-Supported Supercavitation       │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
-│  ┌───────────┐ ┌───────────┐ ┌───────────┐ ┌───────────┐        │
-│  │  Cavity   │ │    Gas    │ │  Acoustic │ │ Downstream│        │
-│  │ Dynamics  │ │ Injection │ │   Source  │ │Disturbance│        │
-│  │  Encoder  │ │  Encoder  │ │  Encoder  │ │  Encoder  │        │
-│  └─────┬─────┘ └─────┬─────┘ └─────┬─────┘ └─────┬─────┘        │
+│  ┌───────────┐ ┌───────────┐ ┌───────────┐ ┌───────────┐       │
+│  │  Cavity   │ │    Gas    │ │  Acoustic │ │ Downstream│       │
+│  │ Dynamics  │ │ Injection │ │   Source  │ │Disturbance│       │
+│  │  Encoder  │ │  Encoder  │ │  Encoder  │ │  Encoder  │       │
+│  └─────┬─────┘ └─────┬─────┘ └─────┬─────┘ └─────┬─────┘       │
 │        │             │             │             │              │
 │        └─────────────┴──────┬──────┴─────────────┘              │
 │                             │                                   │
 │                      ┌──────▼──────┐                            │
-│                      │ Cross-Domain│                            │
-│                      │  Attention  │                            │
+│                      │ Cross-Domain │                            │
+│                      │  Attention   │                            │
 │                      └──────┬──────┘                            │
 │                             │                                   │
 │                      ┌──────▼──────┐                            │
@@ -149,11 +188,11 @@ Each mechanism maps to specific encoder modules within the model architecture.
 │                             │                                   │
 │           ┌─────────────────┼─────────────────┐                 │
 │           │                 │                 │                 │
-│    ┌──────▼──────┐   ┌──────▼──────┐   ┌──────▼──────┐          │
-│    │   Regime    │   │  Mechanism  │   │  Hypothesis │          │
-│    │     Map     │   │ Identifier  │   │  Generator  │          │
-│    │  Generator  │   │             │   │             │          │
-│    └─────────────┘   └─────────────┘   └─────────────┘          │
+│    ┌──────▼──────┐   ┌──────▼──────┐   ┌──────▼──────┐         │
+│    │   Regime    │   │  Mechanism  │   │  Hypothesis │         │
+│    │     Map     │   │ Identifier  │   │  Generator  │         │
+│    │  Generator  │   │             │   │             │         │
+│    └─────────────┘   └─────────────┘   └─────────────┘         │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -634,9 +673,11 @@ Trained model inference is lightweight, enabling rapid exploration of parameter 
 ## References
 
 ### Self-Supervised Foundation Models
+
 1. Meta AI. "DINOv3: Self-supervised learning for vision at unprecedented scale." August 2025. https://ai.meta.com/blog/dinov3-self-supervised-vision-model/
 
 ### Physics-Informed Machine Learning
+
 2. Bianco, M.J., et al. "Machine learning in acoustics: a review." npj Acoustics (2025). https://www.nature.com/articles/s44384-025-00021-w
 
 3. Karniadakis, G.E., et al. "Physics-informed machine learning." Nature Reviews Physics 3, 422–440 (2021). https://www.nature.com/articles/s42254-021-00314-5
@@ -644,25 +685,59 @@ Trained model inference is lightweight, enabling rapid exploration of parameter 
 4. Lienen, M., et al. "GenCFD: High-resolution surrogate modeling for general-purpose CFD simulations." arXiv:2409.18359 (2024). https://arxiv.org/abs/2409.18359
 
 ### Protein Structure Prediction (Conceptual Precedent)
+
 5. Jumper, J., et al. "Highly accurate protein structure prediction with AlphaFold." Nature 596, 583–589 (2021). https://doi.org/10.1038/s41586-021-03819-2
 
 ### Cavitation and Supercavitation
+
 6. Franc, J.P. and Michel, J.M. "Fundamentals of Cavitation." Springer (2004).
 
 7. Savchenko, Y.N. "Supercavitation: Problems and Perspectives." CAV2001, Fourth International Symposium on Cavitation (2001).
 
-### ONR Program Documentation
-8. Office of Naval Research. "Ocean Acoustics Program." https://www.onr.navy.mil/organization/departments/code-32/division-322/ocean-acoustics
+### Cavitation Intensity Recognition (Prior Work)
 
-9. Office of Naval Research. "Ship Signatures Program." https://www.onr.navy.mil/organization/departments/code-33/division-331/ship-signatures
+8. Sha, Y., et al. "A multi-task learning for cavitation detection and cavitation intensity recognition of valve acoustic signals." arXiv:2203.01118 (2022). https://arxiv.org/abs/2203.01118
+
+9. Zhu, Y., et al. "A Review of Pump Cavitation Fault Detection Methods Based on Different Signals." Processes 11(7), 2007 (2023). https://www.mdpi.com/2227-9717/11/7/2007
+
+10. Chen, Q., et al. "Cavitation intensity recognition for high-speed axial piston pumps using 1-D convolutional neural networks with multi-channel inputs of vibration signals." Alexandria Engineering Journal 59(4), 4207-4218 (2020). https://www.sciencedirect.com/science/article/pii/S1110016820303768
+
+### Propeller Cavitation Noise (Prior Work)
+
+11. Miglianti, L., et al. "Predicting the cavitating marine propeller noise at design stage: A deep learning based approach." Ocean Engineering 209, 107481 (2020). https://doi.org/10.1016/j.oceaneng.2020.107481
+
+12. Lee, S., et al. "Data-based modeling of propeller tip-vortex cavitation noise for realistic acoustic ship signature." Applied Acoustics (2025). https://www.sciencedirect.com/science/article/pii/S0003682X25004761
+
+### Underwater Acoustic Target Recognition (Prior Work)
+
+13. Santos-Domínguez, D., et al. "ShipsEar: An underwater vessel noise database." Applied Acoustics 113, 64-69 (2016).
+
+14. Irfan, M., et al. "DeepShip: An underwater acoustic benchmark dataset and a separable convolution based autoencoder for classification." Expert Systems with Applications 183, 115270 (2021).
+
+15. Liu, D., et al. "Underwater Acoustic Target Recognition Based on Depthwise Separable Convolution Neural Networks." Sensors 21(4), 1429 (2021). https://pmc.ncbi.nlm.nih.gov/articles/PMC7922821/
+
+16. Domingos, L.C.F., et al. "A Survey of Underwater Acoustic Data Classification Methods Using Deep Learning for Shoreline Surveillance." Sensors 22(6), 2165 (2022). https://pmc.ncbi.nlm.nih.gov/articles/PMC8954367/
+
+### Machine Condition Monitoring (Prior Work)
+
+17. Nishida, T., et al. "Description and Discussion on DCASE 2024 Challenge Task 2: First-Shot Unsupervised Anomalous Sound Detection for Machine Condition Monitoring." arXiv:2406.07250 (2024). https://arxiv.org/abs/2406.07250
+
+18. Wilkinghoff, K. "Design choices for learning embeddings from auxiliary tasks for domain generalization in anomalous sound detection." DCASE Workshop (2023).
+
+### ONR Program Documentation
+
+19. Office of Naval Research Code 33 (Sea Warfare and Weapons). Program descriptions and funding opportunity announcements. https://www.nre.navy.mil/
+
+20. Navy DSRC (DoD Supercomputing Resource Center). https://www.navydsrc.hpc.mil/
+
 ---
 
 ## Contact
 
-**Keenan Williams | telesis001@icloud.com**
+*Author information to be added.*
 
 ---
 
-**Document Version:** 2.0  
-**Date:** January 2025  
+**Document Version:** 1.0  
+**Date:** December 2024  
 **Classification:** Unclassified / Public Release
