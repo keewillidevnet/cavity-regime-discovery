@@ -167,17 +167,17 @@ Each mechanism maps to specific encoder modules within the model architecture.
 │         Regime Discovery in Gas-Supported Supercavitation       │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
-│  ┌───────────┐ ┌───────────┐ ┌───────────┐ ┌───────────┐       │
-│  │  Cavity   │ │    Gas    │ │  Acoustic │ │ Downstream│       │
-│  │ Dynamics  │ │ Injection │ │   Source  │ │Disturbance│       │
-│  │  Encoder  │ │  Encoder  │ │  Encoder  │ │  Encoder  │       │
-│  └─────┬─────┘ └─────┬─────┘ └─────┬─────┘ └─────┬─────┘       │
+│  ┌───────────┐ ┌───────────┐ ┌───────────┐ ┌───────────┐        │
+│  │  Cavity   │ │    Gas    │ │  Acoustic │ │ Downstream│        │
+│  │ Dynamics  │ │ Injection │ │   Source  │ │Disturbance│        │
+│  │  Encoder  │ │  Encoder  │ │  Encoder  │ │  Encoder  │        │
+│  └─────┬─────┘ └─────┬─────┘ └─────┬─────┘ └─────┬─────┘        │
 │        │             │             │             │              │
 │        └─────────────┴──────┬──────┴─────────────┘              │
 │                             │                                   │
 │                      ┌──────▼──────┐                            │
-│                      │ Cross-Domain │                            │
-│                      │  Attention   │                            │
+│                      │ Cross-Domain│                            │
+│                      │  Attention  │                            │
 │                      └──────┬──────┘                            │
 │                             │                                   │
 │                      ┌──────▼──────┐                            │
@@ -188,11 +188,11 @@ Each mechanism maps to specific encoder modules within the model architecture.
 │                             │                                   │
 │           ┌─────────────────┼─────────────────┐                 │
 │           │                 │                 │                 │
-│    ┌──────▼──────┐   ┌──────▼──────┐   ┌──────▼──────┐         │
-│    │   Regime    │   │  Mechanism  │   │  Hypothesis │         │
-│    │     Map     │   │ Identifier  │   │  Generator  │         │
-│    │  Generator  │   │             │   │             │         │
-│    └─────────────┘   └─────────────┘   └─────────────┘         │
+│    ┌──────▼──────┐   ┌──────▼──────┐   ┌──────▼──────┐          │
+│    │   Regime    │   │  Mechanism  │   │  Hypothesis │          │
+│    │     Map     │   │ Identifier  │   │  Generator  │          │
+│    │  Generator  │   │             │   │             │          │
+│    └─────────────┘   └─────────────┘   └─────────────┘          │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -734,10 +734,11 @@ Trained model inference is lightweight, enabling rapid exploration of parameter 
 
 ## Contact
 
-*Author information to be added.*
+**Author:** Keenan Williams  
+**Email:** telesis001@icloud.com
 
 ---
 
-**Document Version:** 1.0  
-**Date:** December 2024  
+**Document Version:** 3.0  
+**Date:** January 2026  
 **Classification:** Unclassified / Public Release
